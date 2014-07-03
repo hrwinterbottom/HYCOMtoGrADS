@@ -1,0 +1,51 @@
+&fileio
+hycom_filename            = '<HYCOM archv2 [.a] filename>',      # This is the full-path to the HYCOM archv2 [.a] (e.g., direct-access binary) file
+debug                     = .false.                              # Logical variable indicating whether executable should dump debug information
+is_steric                 = .false.                              # Logical variable indicating whether 'steric' variable is within HYCOM binary file; default is .false.
+/
+
+&variableio
+is_dens                   = .true.,                              # Sea-water density profile (kg/m^3) 
+is_dpth                   = .true.,                              # Ocean depth (m)
+is_isotdpth               = .true.,                              # Isotherm depth; is_isointerp must equal .true.
+is_ohc                    = .true.,                              # Integrated ocean heat content (J/m^2); is_zinterp must equal .true.
+is_salin                  = .true.,                              # Sea-water salinity profile (PSU)
+is_uvel                   = .true.,                              # Rotated zonal velocity profile (m/s)
+is_vvel                   = .true.,                              # Rotated meridional velocity profile (m/s)
+is_omlke                  = .true.,                              # Ocean mixed-layer mean kinetic energy (J)
+is_omlu                   = .true.,                              # Ocean mixed-layer rotated mean zonal velocity (m/s) 
+is_omlv                   = .true.,                              # Ocean mixed-layer rotated mean meridional velocity (m/s)
+is_omlt                   = .true.,                              # Ocean mixed-layer mean potential temperature (K)
+is_omls                   = .true.,                              # Ocean mixed-layer mean salinity (PSU)
+is_omld                   = .true.,                              # Ocean mixed-layer mean density (kg/m^3)
+is_tchp                   = .true.,                              # Tropical cyclone heat potential (J/m^2)
+is_sst                    = .true.,                              # Sea-surface (potential) temperature (K)
+is_ssh                    = .true.,                              # Sea-surface height (m)
+depth_integral_dz         = 5.0,                                 # Depth integral dz value; used for calculation of ocean heat content (is_ohc) and tropical cyclone heat potential (is_tchp)
+/
+
+&interpio
+interp_dx                 = 1.0,                                 # Zonal (e.g., longitude) resolution for GrADS grid (degrees)
+interp_dy                 = 1.0,                                 # Meridional (e.g., latitude) resolution for GrADS grid (degrees)
+barnes_nneighbors         = 50,                                  # Number of nearest neighbors for Barnes analysis
+barnes_npasses            = 3,                                   # Number of passes for Barnes filter
+/
+ 
+&hycomio
+regional_grid_filename    = '<HYCOM regional.grid.a filename>',  # This is the full-path to the HYCOM regional.grid.a file
+regional_depth_filename   = '<HYCOM regional.depth.a filename>', # This is the full-path to the HYCOM regional.depth.a file
+ocean_hycom_xdim          = <HYCOM archv2 [.b] file idm>,        # HYCOM grid x-dimension
+ocean_hycom_ydim          = <HYCOM archv2 [.b] file jdm>,        # HYCOM grid y-dimension
+ocean_hycom_zdim          = <HYCOM archv2 [.b] file kdm>,        # HYCOM grid z-dimension
+hycom_time                = <HYCOM time>                         # HYCOM flux day
+/
+
+&zinterpio
+is_zinterp                = .false.,                             # Logical variable indicating whether to interpolate profile variables to user specified depths; this MUST BE .true. if is_ohc = .true.
+zlevs                     = 550.,                                # Depths for interpolation (m); maximum number of levels is 100
+/
+
+&isointerpio
+is_isointerp              = .false.,                             # Logical variable indicating whether to interpolate profile variables to user specified isotherms; this MUST BE .true. if is_isotdpth = .true.  
+tlevs                     = 26.0,                                # Isotherms for interpolation (degress Celcius); maximum number of levels is 100
+/

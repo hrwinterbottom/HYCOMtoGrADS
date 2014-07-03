@@ -1,0 +1,16 @@
+To build and install HYCOMTOGRADS.exe:
+
+(1) Link/copy ./scripts/compile.csh to top-level directory (i.e., hycomtograds)
+(2) Edit ./configure/configure.hycomtograds, specifically:
+    (a) F90
+    (b) LD
+    (c) F77
+    (d) FCFFLAGS
+
+    *NOTE* This HYCOMTOGRADS.exe executable has only been built and
+     tested using the INTEL ifort compiler.
+(3) In top-level directory, do:
+
+    > ./compile.csh
+
+    If successful, HYCOMTOGRADS.exe will be built in top-level directory.
